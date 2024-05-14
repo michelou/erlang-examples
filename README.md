@@ -6,7 +6,7 @@
     <a href="https://erlang.org/" rel="external"><img style="border:0;" src="docs/images/erlang-logo.svg" alt="Erlang project"/></a>
   </td>
   <td style="border:0;padding:0;vertical-align:text-top;">
-    This repository gathers <a href="https://dart.dev/" rel="external">Erlang</a> code examples coming from various websites - mostly from the <a href="https://erlang.org/" rel="external">Erlang</a> project - or written by myself.<br/>
+    This repository gathers <a href="https://dart.dev/" rel="external">Erlang</a> code examples coming from various websites - mostly from the <a href="https://erlang.org/" rel="external">Erlang</a> project - or written by ourself.<br/>
     In particular it includes several build scripts (<a href="https://www.gnu.org/software/bash/manual/bash.html" rel="external">bash scripts</a>, <a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting" rel="external">batch files</a>, <a href="https://makefiletutorial.com/" rel="external">Make scripts</a>) for experimenting with the <a href="https://erlang.org/" rel="external">Erlang</a> language on a Windows machine.
   </td>
   </tr>
@@ -24,6 +24,7 @@ This project depends on the following external software for the **Microsoft Wind
 
 Optionally one may also install the following software:
 
+- [ConEmu][conemu_downloads] ([*release notes*][conemu_relnotes])
 - [Visual Studio Code 1.89][vscode_downloads] ([*release notes*][vscode_relnotes])
 
 > **&#9755;** ***Installation policy***<br/>
@@ -32,11 +33,11 @@ Optionally one may also install the following software:
 For instance our development environment looks as follows (*May 2024*) <sup id="anchor_01">[1](#footnote_01)</sup>:
 
 <pre style="font-size:80%;">
+C:\opt\ConEmu\                <i>( 26 MB)</i>
 C:\opt\elvis\                 <i>(2.4 MB)</i>
 C:\opt\Git\                   <i>(367 MB)</i>
 C:\opt\VSCode\                <i>(341 MB)</i>
 C:\Program Files\Erlang OTP\  <i>(246 MB)</i> <i>(451 MB with docs)</i>
-C:\opt\VSCode\                <i>(341 MB)</i>
 </pre>
 
 > **:mag_right:** [Git for Windows][git_releases] provides a Bash emulation used to run [**`git.exe`**][git_cli] from the command line (as well as over 250 Unix commands like [**`awk`**][man1_awk], [**`diff`**][man1_diff], [**`file`**][man1_file], [**`grep`**][man1_grep], [**`more`**][man1_more], [**`mv`**][man1_mv], [**`rmdir`**][man1_rmdir], [**`sed`**][man1_sed] and [**`wc`**][man1_wc]).
@@ -135,31 +136,33 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 
 <!-- link refs -->
 
-[ada_examples]: https://github.com/michelou/ada-examples?tab=readme-ov-file#playing-with-ada-on-windows
-[akka_examples]: https://github.com/michelou/akka-examples
-[cobol_examples]: https://github.com/michelou/cobol-examples
-[cpp_examples]: https://github.com/michelou/cpp-examples
-[dart_examples]: https://github.com/michelou/dart-examples
-[deno_examples]: https://github.com/michelou/deno-examples
+[ada_examples]: https://github.com/michelou/ada-examples#top
+[akka_examples]: https://github.com/michelou/akka-examples#top
+[cobol_examples]: https://github.com/michelou/cobol-examples#top
+[conemu_downloads]: https://github.com/Maximus5/ConEmu/releases
+[conemu_relnotes]: https://conemu.github.io/blog/2023/07/24/Build-230724.html
+[cpp_examples]: https://github.com/michelou/cpp-examples#top
+[dart_examples]: https://github.com/michelou/dart-examples#top
+[deno_examples]: https://github.com/michelou/deno-examples#top
 [dialyzer]: https://www.erlang.org/doc/apps/dialyzer/dialyzer_chapter
-[docker_examples]: https://github.com/michelou/docker-examples
+[docker_examples]: https://github.com/michelou/docker-examples#top
 [elvis_releases]: https://github.com/inaka/elvis/releases
 [erlang]: https://erlang.org/
 [erlang_changelog]: https://github.com/erlang/otp/releases
 [erlang_releases]: https://github.com/erlang/otp/releases
-[flix_examples]: https://github.com/michelou/flix-examples
+[flix_examples]: https://github.com/michelou/flix-examples#top
 [git_cli]: https://git-scm.com/docs/git
 [git_releases]: https://git-scm.com/download/win
-[git_relnotes]: https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/2.42.0.txt
+[git_relnotes]: https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/2.45.0.txt
 [github_markdown]: https://github.github.com/gfm/
-[golang_examples]: https://github.com/michelou/golang-examples
-[graalvm_examples]: https://github.com/michelou/graalvm-examples
-[haskell_examples]: https://github.com/michelou/haskell-examples
+[golang_examples]: https://github.com/michelou/golang-examples#top
+[graalvm_examples]: https://github.com/michelou/graalvm-examples#top
+[haskell_examples]: https://github.com/michelou/haskell-examples#top
 [jmh]: https://openjdk.java.net/projects/code-tools/jmh/
-[kafka_examples]: https://github.com/michelou/kafka-examples
-[kotlin_examples]: https://github.com/michelou/kotlin-examples
-[llvm_examples]: https://github.com/michelou/llvm-examples
-[m2_examples]: https://github.com/michelou/m2-examples
+[kafka_examples]: https://github.com/michelou/kafka-examples#top
+[kotlin_examples]: https://github.com/michelou/kotlin-examples#top
+[llvm_examples]: https://github.com/michelou/llvm-examples#top
+[m2_examples]: https://github.com/michelou/m2-examples#top
 [man1_awk]: https://www.linux.org/docs/man1/awk.html
 [man1_diff]: https://www.linux.org/docs/man1/diff.html
 [man1_file]: https://www.linux.org/docs/man1/file.html
@@ -169,13 +172,13 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 [man1_rmdir]: https://www.linux.org/docs/man1/rmdir.html
 [man1_sed]: https://www.linux.org/docs/man1/sed.html
 [man1_wc]: https://www.linux.org/docs/man1/wc.html
-[nodejs_examples]: https://github.com/michelou/nodejs-examples
-[rust_examples]: https://github.com/michelou/rust-examples
-[scala3_examples]: https://github.com/michelou/dotty-examples
+[nodejs_examples]: https://github.com/michelou/nodejs-examples#top
+[rust_examples]: https://github.com/michelou/rust-examples#top
+[scala3_examples]: https://github.com/michelou/dotty-examples#top
 [sh_cli]: https://man7.org/linux/man-pages/man1/sh.1p.html
-[spark_examples]: https://github.com/michelou/spark-examples
-[spring_examples]: https://github.com/michelou/spring-examples?tab=readme-ov-file#playing-with-spring-on-windows
-[trufflesqueak_examples]: https://github.com/michelou/trufflesqueak-examples
+[spark_examples]: https://github.com/michelou/spark-examples#top
+[spring_examples]: https://github.com/michelou/spring-examples#top
+[trufflesqueak_examples]: https://github.com/michelou/trufflesqueak-examples#top
 [unix_opt]: https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/opt.html
 [vscode_downloads]: https://code.visualstudio.com/#alt-downloads
 [vscode_relnotes]: https://code.visualstudio.com/updates/
@@ -183,5 +186,5 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 [windows_installer]: https://docs.microsoft.com/en-us/windows/win32/msi/windows-installer-portal
 [windows_limitation]: https://support.microsoft.com/en-gb/help/830473/command-prompt-cmd-exe-command-line-string-limitation
 [windows_subst]: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/subst
-[wix_examples]: https://github.com/michelou/wix-examples
+[wix_examples]: https://github.com/michelou/wix-examples#top
 [zip_archive]: https://www.howtogeek.com/178146/htg-explains-everything-you-need-to-know-about-zipped-files/
