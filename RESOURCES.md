@@ -38,7 +38,7 @@
 - [learn you some Erlang](https://learnyousomeerlang.com/contents) by Fred Hebert.
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/May 2024* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/June 2024* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- href links -->
