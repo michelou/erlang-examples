@@ -55,8 +55,8 @@ set _WARNING_LABEL=%_STRONG_FG_YELLOW%Warning%_RESET%:
 set "_SOURCE_DIR=%_ROOT_DIR%\src"
 set "_TARGET_DIR=%_ROOT_DIR%target"
 
-set _EXPORT_NAME=hello_world
-for %%i in ("%~dp0\.") do set "_MODULE_NAME=%%~ni"
+set _EXPORT_NAME=start
+for /f "delims=" %%i in ("%~dp0\.") do set "_MODULE_NAME=%%~ni"
 set "_BEAM_FILE=%_TARGET_DIR%\%_MODULE_NAME%.beam"
 
 if not exist "%ERLANG_HOME%\bin\erl.exe" (

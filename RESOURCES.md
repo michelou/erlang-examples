@@ -10,6 +10,7 @@
 
 ## <span id="articles">Articles</span>
 
+- [Set-theoretic Types for Erlang](https://arxiv.org/abs/2302.12783) by A. Schimpf & al., June 2023.
 - [Erlang, programmation distribuée et modèle acteur][article_kerjouan] by Mathieu Kerjouan, May 2020.
 - [A Comparison between Rust and Erlang][article_thokala] by Krishna Kumar Thokala, March 2018.
 - [Why I Program In Erlang][article_miller] by Evan Miller, October 2012.
@@ -28,17 +29,20 @@
 - [Programming Erlang][book_amstrong] (2<sup>nd</sup> Edition) by Joe Amstrong, October 2013.<br/><span style="font-size:80%;">(The Pragmatic Programmers, ISBN 978-1937785536, 548 pages).</span>
 - [Learn You Some Erlang for Great Good!][book_hebert] by Fred Hebert, January 2013.<br/><span style="font-size:80%;">(No Starch Press, ISBN 978-1593274351, 624 pages).</span>
 - [Erlang and OTP in Action][book_logan] by Martin Logan &amp; al., November 2010.<br/><span style="font-size:80%;">(Manning, ISBN 978-1-933988788, 432 pages).</span>
+- [ Stuff Goes Bad Erlang in Anger](https://www.erlang-in-anger.com/) by Fred Hebert, 2016.
 
-<!--
+<!--=======================================================================-->
+
 ## <span id="tools">Tools</span>
--->
+
+- [eqWAlizer](https://github.com/WhatsApp/eqwalizer) &ndash; a type-checker for [Erlang].
 
 ## <span id="tutorials">Tutorials</span>
 
 - [learn you some Erlang](https://learnyousomeerlang.com/contents) by Fred Hebert.
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/June 2024* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/July 2024* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- href links -->

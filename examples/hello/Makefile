@@ -13,7 +13,7 @@ include ../Makefile.inc
 SOURCE_FILES=$(wildcard src/main/erlang/*.erl)
 
 MODULE_NAME=hello
-EXPORT_NAME=hello_world
+EXPORT_NAME=start
 
 TARGET_DIR=target
 
@@ -35,7 +35,7 @@ help:
 	@$(ECHO) ""
 	@$(ECHO) "  Subcommands:"
 	@$(ECHO) "    all    alias for build"
-	@$(ECHO) "    build  compile C++ source files"
+	@$(ECHO) "    build  compile Erlang source files"
 	@$(ECHO) "    clean  delete generated files"
 	@$(ECHO) "    help   print this help message"
 	@$(ECHO) "    run    execute main program \"$(MODULE_NAME)\""

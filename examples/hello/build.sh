@@ -192,7 +192,7 @@ SOURCE_MAIN_DIR="$SOURCE_DIR/main/erlang"
 TARGET_DIR="$ROOT_DIR/target"
 
 MODULE_NAME=hello
-EXPORT_NAME=hello_world
+EXPORT_NAME=start
 
 CLEAN=false
 COMPILE=false
