@@ -9,31 +9,62 @@
   </tr>
 </table>
 
-## <span id="hello">`hello` Example</span>
+## <span id="factorial">`factorial` Example</span>
 
 This example has the following directory structure :
 
-<pre style="font-size:80;%">
+<pre style="font-size:80%;">
+<b>&gt; <a href="">tree</a> /a /f . | <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/findstr" rel="external">findstr</a> /v /b [A-Z]</b>
+|   <a href="./factorial/00download.txt">00download.txt</a>
+|   <a href="./factorial/build.bat">build.bat</a>
+|   <a href="./factorial/build.sh">build.sh</a>
+|   <a href="./factorial/Makefile">Makefile</a>
+\---<b>src</b>
+    \---<b>main</b>
+        \---<b>erlang</b>
+                <a href="./factorial/src/main/erlang/factorial.erl">factorial.erl</a>
+</pre>
+
+Command [**`build.bat`**](./factorail/build.bat) generates and executes the Erlang program `factorial.beam` :
+
+<pre style="font-size:80%;">
+<b>&gt; <a href="./factorial/build.bat">build</a> -verbose run</b>
+Compile 1 Erlang source file into directory "target"
+Execute Erlang program "target\factorial.beam"
+fac1(10) = 120
+fac2(10) = 120
+fac3(10) = 120
+</pre>
+
+<!--=======================================================================-->
+
+## <span id="hello">`hello` Example</span> [**&#x25B4;**](#top)
+
+This example has the following directory structure :
+
+<pre style="font-size:80%;">
 <b>&gt; <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tree" rel="external">tree</a> /a /f . | <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/findstr" rel="external">findstr</a> /v /b [A-Z]</b>
 |   <a href="./hello/build.bat">build.bat</a>
 |   <a href="./hello/build.sh">build.sh</a>
 |   <a href="./hello/Makefile">Makefile</a>
-\---src
-    \---main
-        \---erlang
+\---<b>src</b>
+    \---<b>main</b>
+        \---<b>erlang</b>
                 <a href="./hello/src/main/erlang/hello.erl">hello.erl</a>
 </pre>
 
+Command [**`build.sh`**](./hello/build.sh) generates and executes the Erlang program `hello.beam` :
 <pre style="font-size:80%;">
 <b>&gt; <a href="https://man7.org/linux/man-pages/man1/sh.1p.html" rel="external">sh</a> ./<a href="./hello/build.sh">build.sh</a> -verbose clean run</b>
 Compile 1 Erlang source file to directory "target"
-Execute Erlang program "hello"
+Execute Erlang program "target\hello.beam"
 Hello, World!
 </pre>
 
+
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/July 2024* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/August 2024* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- link refs -->

@@ -169,11 +169,11 @@ run() {
     if $DEBUG; then
         debug "\"$ERL_CMD\" $erlc_opts"
     elif $VERBOSE; then
-        echo "Execute Erlang program \"${beam_file/$ROOT_DIR\//}\"" 1>&2
+        echo "Execute Erlang program \"$MODULE_NAME\"" 1>&2
     fi
     eval "\"$ERL_CMD\" $erlc_opts"
     if [[ $? -ne 0 ]]; then
-        error "Failed to execute Erlang program \"${beam_file/$ROOT_DIR\//}\"" 1>&2
+        error "Failed to execute Erlang program \"$MODULE_NAME\"" 1>&2
         cleanup 1
     fi
 }
@@ -191,7 +191,7 @@ SOURCE_DIR="$ROOT_DIR/src"
 SOURCE_MAIN_DIR="$SOURCE_DIR/main/erlang"
 TARGET_DIR="$ROOT_DIR/target"
 
-MODULE_NAME=hello
+MODULE_NAME=factorial
 EXPORT_NAME=start
 
 CLEAN=false
