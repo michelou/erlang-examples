@@ -17,12 +17,16 @@
 
 ## <span id="blogs">Blogs</span> [**&#x25B4;**](#top)
 
+- [Deep Diving Into the Erlang Scheduler](https://blog.appsignal.com/2024/04/23/deep-diving-into-the-erlang-scheduler.html) by Sapan Diwakar, April 2024.
 - [How To Compile Erlang Code: Essential Steps And Techniques](https://marketsplash.com/how-to-compile-erlang-code/)
  by the [MarketSplash Team](https://marketsplash.com/about-us/), December 2023.
  - [An Overview of Erlang with Examples](https://www.freecodecamp.org/news/an-overview-of-erlang-with-examples/), February 2020.
 - [Erlang Scheduler Details and Why It Matters][blog_soleimani_2016] by Hamidreza Soleimani, February 2016.
 - [Erlang Garbage Collection Details and Why It Matters][blog_soleimani_2015] by Hamidreza Soleimani, August 2015.
-
+- [Fred Herbert's](https://ferd.ca/) Blog posts :
+  - [Ten Years of Erlang](https://ferd.ca/ten-years-of-erlang.html), July 2019.
+  - [The Zen of Erlang](https://ferd.ca/the-zen-of-erlang.html), February 2016.
+  - [On Erlang's Syntax](https://ferd.ca/on-erlang-s-syntax.html), July 2010.
 ## <span id="books">Books</span> [**&#x25B4;**](#top)
 
 - [The Erlang Runtime System](https://blog.stenmans.org/theBeamBook/) (*online book*) by Erik Stenman, May 2023.
@@ -42,7 +46,7 @@
 - [learn you some Erlang](https://learnyousomeerlang.com/contents) by Fred Hebert.
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/August 2024* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/October 2024* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- href links -->
