@@ -68,6 +68,10 @@ set "_ERL_CMD=%ERLANG_HOME%\bin\erl.exe"
 set "_ERLC_CMD=%ERLANG_HOME%\bin\erlc.exe"
 set "_DIALYZER_CMD=%ERLANG_HOME%\bin\dialyzer.exe"
 
+set _ELVIS_CMD=
+if exist "%ELVIS_HOME%\elvis.bat" (
+    set "_ELVIS_CMD=%ELVIS_HOME%\elvis.bat"
+)
 @rem use newer PowerShell version if available
 where /q pwsh.exe
 if %ERRORLEVEL%==0 ( set _PWSH_CMD=pwsh.exe
@@ -172,9 +176,14 @@ goto args_loop
 set _STDOUT_REDIRECT=1^>NUL
 if %_DEBUG%==1 set _STDOUT_REDIRECT=
 
+if %_LINT%==1 if not defined _ELVIS_CMD (
+    echo %_WARNING_LABEL% Elvis command not found ^(option "-lint" disabled^) 1>&2
+    set _LINT=0
+)
 if %_DEBUG%==1 (
     echo %_DEBUG_LABEL% Options    : _TARGET=%_TARGET% _TIMER=%_TIMER% _VERBOSE=%_VERBOSE% 1>&2
     echo %_DEBUG_LABEL% Subcommands: _CLEAN=%_CLEAN% _COMPILE=%_COMPILE% _LINT=%_LINT% _RUN=%_RUN% 1>&2
+    echo %_DEBUG_LABEL% Variables  : "ELVIS_HOME=%ELVIS_HOME%" 1>&2
     echo %_DEBUG_LABEL% Variables  : "ERLANG_HOME=%ERLANG_HOME%" 1>&2
     echo %_DEBUG_LABEL% Variables  : "GIT_HOME=%GIT_HOME%" 1>&2
 )
@@ -203,7 +212,7 @@ echo   %__BEG_P%Subcommands:%__END%
 echo     %__BEG_O%clean%__END%       delete generated files
 echo     %__BEG_O%compile%__END%     generate executable files
 echo     %__BEG_O%help%__END%        print this help message
-echo     %__BEG_O%lint%__END%        analyze Erlang source files with Lint
+echo     %__BEG_O%lint%__END%        analyze Erlang source files with Elvis
 echo     %__BEG_O%run%__END%         execute the generated program
 goto :eof
 
@@ -228,13 +237,13 @@ if not %ERRORLEVEL%==0 (
 goto :eof
 
 :lint
-set __DART_OPTS=
-if %_DEBUG%==1 set __DART_OPTS=--verbose %__DART_OPTS%
+set __ELVIS_OPTS=--output-format plain 
+if %_DEBUG%==0 set __ELVIS_OPTS=--quiet %__ELVIS_OPTS%
 
-if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_DART_CMD%" analyze "%_SOURCE_DIR%\main\erlang" %__DART_OPTS%
+if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_ELVIS_CMD%" rock %__ELVIS_OPTS%
 ) else if %_VERBOSE%==1 echo Analyze Erlang source files in directory "!_SOURCE_DIR:%_ROOT_DIR%\=!" 1>&2
 )
-call "%_DART_CMD%" analyze "%_SOURCE_DIR%\main\erlang" %__DART_OPTS% %_STDOUT_REDIRECT%
+call "%_ELVIS_CMD%" rock %__ELVIS_OPTS% %_STDOUT_REDIRECT%
 if not %ERRORLEVEL%==0 (
     echo %_ERROR_LABEL% Failed to analyze Erlang source files in directory "!_SOURCE_DIR:%_ROOT_DIR%\=!" 1>&2
     set _EXITCODE=1

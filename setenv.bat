@@ -26,6 +26,11 @@ if %_HELP%==1 (
 set _GIT_PATH=
 set _VSCODE_PATH=
 
+call :elvis
+if not %_EXITCODE%==0 (
+    @rem optional
+    set _EXITCODE=0
+)
 call :erlang
 if not %_EXITCODE%==0 goto end
 
@@ -233,6 +238,33 @@ echo   %__BEG_P%Subcommands:%__END%
 echo     %__BEG_O%help%__END%        print this help message
 goto :eof
 
+@rem output parameter: _ELVIS_HOME
+:elvis
+set _ELVIS_HOME=
+
+set __ELVIS_CMD=
+for /f "delims=" %%f in ('where elvis.bat 2^>NUL') do set "__ELVIS_CMD=%%f"
+if defined __ELVI_CMD (
+    for /f "delims=" %%i in ("%__ELVIS_CMD%") do set "__ELVIS_HOME=%%~dpi"
+    if %_DEBUG%==1 echo %_DEBUG_LABEL% Using path of Elvis executable found in PATH 1>&2
+) else if defined ELVIS_HOME (
+    set "_ELVIS_HOME=%ELVIS_HOME%"
+    if %_DEBUG%==1 echo %_DEBUG_LABEL% Using environment variable ELVIS_HOME 1>&2
+) else (
+    set "__PATH=%ProgramFiles%"
+    for /f "delims=" %%f in ('dir /ad /b "!__PATH!\Elvis*" 2^>NUL') do set "_ELVIS_HOME=!__PATH!\%%f"
+    if defined _ELVIS_HOME (
+        if %_DEBUG%==1 echo %_DEBUG_LABEL% Using default Elvis installation directory "!_ELVIS_HOME!" 1>&2
+    )
+)
+if not exist "%_ELVIS_HOME%\elvis.bat" (
+    echo %_ERROR_LABEL% Elvis executable not found ^("%_ELVIS_HOME%"^) 1>&2
+    set _ELVIS_HOME=
+    set _EXITCODE=1
+    goto :eof
+)
+goto :eof
+
 @rem output parameter: _ERLANG_HOME
 :erlang
 set _ERLANG_HOME=
@@ -376,6 +408,7 @@ goto :eof
 set __VERBOSE=%1
 set __VERSIONS_LINE1=
 set __VERSIONS_LINE2=
+set __VERSIONS_LINE3=
 set __WHERE_ARGS=
 where /q "%ERLANG_HOME%\bin:erl.exe"
 if %ERRORLEVEL%==0 (
@@ -392,16 +425,30 @@ if %ERRORLEVEL%==0 (
     for /f "tokens=1,2,3,*" %%i in ('"%MSYS_HOME%\usr\bin\make.exe" --version 2^>^&1 ^| findstr Make') do set "__VERSIONS_LINE1=%__VERSIONS_LINE1% make %%k,"
     set __WHERE_ARGS=%__WHERE_ARGS% "%MSYS_HOME%\usr\bin:make.exe"
 )
+where /q "%ELVIS_HOME%:elvis.bat"
+if %ERRORLEVEL%==0 (
+    for /f "tokens=1,2,*" %%i in ('call "%ELVIS_HOME%\elvis.bat" --version 2^>^&1 ^| findstr /b Version') do set "__VERSIONS_LINE2=%__VERSIONS_LINE2% elvis %%j,"
+    set __WHERE_ARGS=%__WHERE_ARGS% "%ELVIS_HOME%:elvis.bat"
+)
+where /q "%VSCODE_HOME%\bin:code.cmd"
+if %ERRORLEVEL%==0 (
+    set __CODE_VERSION=
+    for /f "tokens=*" %%i in ('"%VSCODE_HOME%\bin\code.cmd" --version 2^>^&1') do (
+         if not defined __CODE_VERSION set "__CODE_VERSION=%%i"
+    )
+    set "__VERSIONS_LINE2=%__VERSIONS_LINE2% code !__CODE_VERSION!,"
+    set __WHERE_ARGS=%__WHERE_ARGS% "%VSCODE_HOME%\bin:code.cmd"
+)
 where /q "%GIT_HOME%\bin:git.exe"
 if %ERRORLEVEL%==0 (
     for /f "tokens=1,2,*" %%i in ('"%GIT_HOME%\bin\git.exe" --version') do (
-        for /f "delims=. tokens=1,2,3,*" %%a in ("%%k") do set "__VERSIONS_LINE2=%__VERSIONS_LINE2% git %%a.%%b.%%c,"
+        for /f "delims=. tokens=1,2,3,*" %%a in ("%%k") do set "__VERSIONS_LINE3=%__VERSIONS_LINE3% git %%a.%%b.%%c,"
     )
     set __WHERE_ARGS=%__WHERE_ARGS% "%GIT_HOME%\bin:git.exe"
 )
 where /q "%GIT_HOME%\usr\bin:diff.exe"
 if %ERRORLEVEL%==0 (
-    for /f "tokens=1-3,*" %%i in ('"%GIT_HOME%\usr\bin\diff.exe" --version ^| findstr diff') do set "__VERSIONS_LINE2=%__VERSIONS_LINE2% diff %%l,"
+    for /f "tokens=1-3,*" %%i in ('"%GIT_HOME%\usr\bin\diff.exe" --version ^| findstr diff') do set "__VERSIONS_LINE3=%__VERSIONS_LINE3% diff %%l,"
     set __WHERE_ARGS=%__WHERE_ARGS% "%GIT_HOME%\usr\bin:diff.exe"
 )
 where /q "%GIT_HOME%\bin:bash.exe"
@@ -409,13 +456,14 @@ if %ERRORLEVEL%==0 (
     for /f "usebackq tokens=1-3,4,*" %%i in (`"%GIT_HOME%\bin\bash.exe" --version ^| findstr bash`) do (
         set "__VERSION=%%l"
         setlocal enabledelayedexpansion
-        set "__VERSIONS_LINE2=%__VERSIONS_LINE2% bash !__VERSION:-release=!"
+        set "__VERSIONS_LINE3=%__VERSIONS_LINE3% bash !__VERSION:-release=!"
     )
     set __WHERE_ARGS=%__WHERE_ARGS% "%GIT_HOME%\bin:bash.exe"
 )
 echo Tool versions:
 echo   %__VERSIONS_LINE1%
 echo   %__VERSIONS_LINE2%
+echo   %__VERSIONS_LINE3%
 if %__VERBOSE%==1 if defined __WHERE_ARGS (
     @rem if %_DEBUG%==1 echo %_DEBUG_LABEL% where %__WHERE_ARGS%
     echo Tool paths: 1>&2
@@ -425,6 +473,7 @@ if %__VERBOSE%==1 if defined __WHERE_ARGS (
         echo    !__LINE:%USERPROFILE%=%%USERPROFILE%%! 1>&2
     )
     echo Environment variables: 1>&2
+    if defined ELVIS_HOME echo    "ELVIS_HOME=%ELVIS_HOME%" 1>&2
     if defined ERLANG_HOME echo    "ERLANG_HOME=%ERLANG_HOME%" 1>&2
     if defined GIT_HOME echo    "GIT_HOME=%GIT_HOME%" 1>&2
     if defined MSYS_HOME echo    "MSYS_HOME=%MSYS_HOME%" 1>&2
@@ -444,6 +493,7 @@ goto :eof
 :end
 endlocal & (
     if %_EXITCODE%==0 (
+        if not defined ELVIS_HOME set "ELVIS_HOME=%_ELVIS_HOME%"
         if not defined ERLANG_HOME set "ERLANG_HOME=%_ERLANG_HOME%"
         if not defined GIT_HOME set "GIT_HOME=%_GIT_HOME%"
         if not defined MSYS_HOME set "MSYS_HOME=%_MSYS_HOME%"

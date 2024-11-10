@@ -20,7 +20,7 @@ getHome() {
 
 debug() {
     local DEBUG_LABEL="[46m[DEBUG][0m"
-    $DEBUG && echo "$DEBUG_LABEL $1" 1>&2
+    [[ $DEBUG -eq 1 ]] && echo "$DEBUG_LABEL $1" 1>&2
 }
 
 warning() {
@@ -37,7 +37,7 @@ error() {
 cleanup() {
     [[ $1 =~ ^[0-1]$ ]] && EXITCODE=$1
 
-    if $TIMER; then
+    if [[ $TIMER -eq 1 ]]; then
         local TIMER_END=$(date +'%s')
         local duration=$((TIMER_END - TIMER_START))
         echo "Total execution time: $(date -d @$duration +'%H:%M:%S')" 1>&2
@@ -47,25 +47,25 @@ cleanup() {
 }
 
 args() {
-    [[ $# -eq 0 ]] && HELP=true && return 1
+    [[ $# -eq 0 ]] && HELP=1 && return 1
 
     for arg in "$@"; do
         case "$arg" in
         ## options
-        -debug)       DEBUG=true ;;
-        -help)        HELP=true ;;
-        -timer)       TIMER=true ;;
-        -verbose)     VERBOSE=true ;;
+        -debug)       DEBUG=1 ;;
+        -help)        HELP=1 ;;
+        -timer)       TIMER=1 ;;
+        -verbose)     VERBOSE=1 ;;
         -*)
             error "Unknown option $arg"
             EXITCODE=1 && return 0
             ;;
         ## subcommands
-        clean)   CLEAN=true ;;
-        compile) COMPILE=true ;;
-        help)    HELP=true ;;
-        lint)    LINT=true ;;
-        run)     COMPILE=true && RUN=true ;;
+        clean)   CLEAN=1 ;;
+        compile) COMPILE=1 ;;
+        help)    HELP=1 ;;
+        lint)    LINT=1 ;;
+        run)     COMPILE=1 && RUN=1 ;;
         *)
             error "Unknown subcommand $arg"
             EXITCODE=1 && return 0
@@ -77,7 +77,7 @@ args() {
     debug "Variables  : ERLANG_HOME=$ERLANG_HOME"
     debug "Variables  : GIT_HOME=$GIT_HOME"
     # See http://www.cyberciti.biz/faq/linux-unix-formatting-dates-for-display/
-    $TIMER && TIMER_START=$(date +"%s")
+    [[ $TIMER -eq 1 ]] && TIMER_START=$(date +"%s")
 }
 
 help() {
@@ -100,9 +100,9 @@ EOS
 
 clean() {
     if [[ -d "$TARGET_DIR" ]]; then
-        if $DEBUG; then
+        if [[ $DEBUG -eq 1 ]]; then
             debug "rm -rf \"$TARGET_DIR\""
-        elif $VERBOSE; then
+        elif [[ $VERBOSE -eq 1 ]]; then
             echo "Delete directory \"${TARGET_DIR/$ROOT_DIR\//}\"" 1>&2
         fi
         rm -rf "$TARGET_DIR"
@@ -122,7 +122,7 @@ compile() {
     [[ -d "$TARGET_DIR" ]] || mkdir -p "$TARGET_DIR"
 
     local erlc_flags="-o \"$(mixed_path $TARGET_DIR)\""
-    $DEBUG && erlc_flags="-v $erlc_flags"
+    [[ $DEBUG -eq 1 ]] && erlc_flags="-v $erlc_flags"
 
     local source_files=
     local n=0
@@ -136,9 +136,9 @@ compile() {
     fi
     local s=; [[ $n -gt 1 ]] && s="s"
     local n_files="$n Erlang source file$s"
-    if $DEBUG; then
+    if [[ $DEBUG -eq 1 ]]; then
         debug "\"$ERLC_CMD\" $erlc_flags $source_files"
-    elif $VERBOSE; then
+    elif [[ $VERBOSE -eq 1 ]]; then
         echo "Compile $n_files to directory \"${TARGET_DIR/$ROOT_DIR\//}\"" 1>&2
     fi
     eval "\"$ERLC_CMD\" $erlc_flags $source_files"
@@ -151,7 +151,7 @@ compile() {
 mixed_path() {
     if [[ -x "$CYGPATH_CMD" ]]; then
         $CYGPATH_CMD -am "$*"
-    elif $mingw || $msys; then
+    elif [[ $(($mingw + $msys)) -gt 0 ]]; then
         echo "$*" | sed 's|/|\\\\|g'
     else
         echo "$*"
@@ -166,9 +166,9 @@ run() {
     fi
     local erlc_opts="-noshell -pa \"$TARGET_DIR\" -s \"$MODULE_NAME\" \"$EXPORT_NAME\" -s init stop"
 
-    if $DEBUG; then
+    if [[ $DEBUG -eq 1 ]]; then
         debug "\"$ERL_CMD\" $erlc_opts"
-    elif $VERBOSE; then
+    elif [[ $VERBOSE -eq 1 ]]; then
         echo "Execute Erlang program \"$MODULE_NAME\"" 1>&2
     fi
     eval "\"$ERL_CMD\" $erlc_opts"
@@ -194,32 +194,34 @@ TARGET_DIR="$ROOT_DIR/target"
 MODULE_NAME=factorial
 EXPORT_NAME=start
 
-CLEAN=false
-COMPILE=false
-DEBUG=false
-HELP=false
-LINT=false
-RUN=false
-TIMER=false
-VERBOSE=false
+## We refrain from using `true` and `false` which are Bash commands
+## (see https://man7.org/linux/man-pages/man1/false.1.html)
+CLEAN=0
+COMPILE=0
+DEBUG=0
+HELP=0
+LINT=0
+RUN=0
+TIMER=0
+VERBOSE=0
 
 COLOR_START="[32m"
 COLOR_END="[0m"
 
-cygwin=false
-mingw=false
-msys=false
-darwin=false
+cygwin=0
+mingw=0
+msys=0
+darwin=0
 case "$(uname -s)" in
-    CYGWIN*) cygwin=true ;;
-    MINGW*)  mingw=true ;;
-    MSYS*)   msys=true ;;
-    Darwin*) darwin=true
+    CYGWIN*) cygwin=1 ;;
+    MINGW*)  mingw=1 ;;
+    MSYS*)   msys=1 ;;
+    Darwin*) darwin=1
 esac
 unset CYGPATH_CMD
 PSEP=":"
 TARGET_EXT=
-if $cygwin || $mingw || $msys; then
+if [[ $(($cygwin + $mingw + $msys)) -gt 0 ]]; then
     CYGPATH_CMD="$(which cygpath 2>/dev/null)"
 	PSEP=";"
     TARGET_EXT=".exe"
@@ -236,18 +238,18 @@ args "$@"
 ##############################################################################
 ## Main
 
-$HELP && help && cleanup
+[[ $HELP -eq 1 ]] && help && cleanup
 
-if $CLEAN; then
+if [[ $CLEAN -eq 1 ]]; then
     clean || cleanup 1
 fi
-if $LINT; then
+if [[ $LINT -eq 1 ]]; then
     lint || cleanup 1
 fi
-if $COMPILE; then
+if [[ $COMPILE -eq 1 ]]; then
     compile || cleanup 1
 fi
-if $RUN; then
+if [[ $RUN -eq 1 ]]; then
     run || cleanup 1
 fi
 cleanup

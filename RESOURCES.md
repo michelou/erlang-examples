@@ -15,6 +15,8 @@
 - [A Comparison between Rust and Erlang][article_thokala] by Krishna Kumar Thokala, March 2018.
 - [Why I Program In Erlang][article_miller] by Evan Miller, October 2012.
 
+<!--===========================================================================-->
+
 ## <span id="blogs">Blogs</span> [**&#x25B4;**](#top)
 
 - [Deep Diving Into the Erlang Scheduler](https://blog.appsignal.com/2024/04/23/deep-diving-into-the-erlang-scheduler.html) by Sapan Diwakar, April 2024.
@@ -27,6 +29,7 @@
   - [Ten Years of Erlang](https://ferd.ca/ten-years-of-erlang.html), July 2019.
   - [The Zen of Erlang](https://ferd.ca/the-zen-of-erlang.html), February 2016.
   - [On Erlang's Syntax](https://ferd.ca/on-erlang-s-syntax.html), July 2010.
+
 ## <span id="books">Books</span> [**&#x25B4;**](#top)
 
 - [The Erlang Runtime System](https://blog.stenmans.org/theBeamBook/) (*online book*) by Erik Stenman, May 2023.
@@ -46,7 +49,7 @@
 - [learn you some Erlang](https://learnyousomeerlang.com/contents) by Fred Hebert.
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/October 2024* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/November 2024* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- href links -->
