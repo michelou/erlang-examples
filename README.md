@@ -12,7 +12,7 @@
   </tr>
 </table>
 
-[Ada][ada_examples], [Akka][akka_examples], [C++][cpp_examples], [COBOL][cobol_examples], [Dafny][dafny_examples], [Dart][dart_examples], [Deno][deno_examples], [Docker][docker_examples], [Flix][flix_examples], [Golang][golang_examples], [GraalVM][graalvm_examples], [Haskell][haskell_examples], [Kafka][kafka_examples], [Kotlin][kotlin_examples], [LLVM][llvm_examples], [Modula-2][m2_examples], [Node.js][nodejs_examples], [Rust][rust_examples], [Scala 3][scala3_examples], [Spark][spark_examples], [Spring][spring_examples], [TruffleSqueak][trufflesqueak_examples], [WiX Toolset][wix_examples] and [Zig][zig_examples] are other topics we are continuously monitoring.
+[Ada][ada_examples], [Akka][akka_examples], [C++][cpp_examples], [COBOL][cobol_examples], [Dafny][dafny_examples], [Dart][dart_examples], [Deno][deno_examples], [Docker][docker_examples], [Flix][flix_examples], [Golang][golang_examples], [GraalVM][graalvm_examples], [Haskell][haskell_examples], [Kafka][kafka_examples], [Kotlin][kotlin_examples], [LLVM][llvm_examples], [Modula-2][m2_examples], [Node.js][nodejs_examples], [Rust][rust_examples], [Scala 3][scala3_examples], [Spark][spark_examples], [Spring][spring_examples], [Standard ML][sml_examples], [TruffleSqueak][trufflesqueak_examples], [WiX Toolset][wix_examples] and [Zig][zig_examples] are other topics we are continuously monitoring.
 
 ## <span id="proj_deps">Project dependencies</span>
 
@@ -20,23 +20,23 @@ This project depends on the following external software for the **Microsoft Wind
 
 - [Elvis 3][elvis_releases] ([*release notes*][elvis_relnotes])
 - [Erlang 27][erlang_releases] ([*changelog*][erlang_changelog])
-- [Git 2.47][git_releases] ([*release notes*][git_relnotes])
+- [Git 2.48][git_releases] ([*release notes*][git_relnotes])
 
 Optionally one may also install the following software:
 
-- [ConEmu 2023][conemu_downloads] ([*release notes*][conemu_relnotes])
-- [Visual Studio Code 1.95][vscode_downloads] ([*release notes*][vscode_relnotes])
+- [ConEmu 2023][conemu_downloads] <sup id="anchor_01">[1](#footnote_01)</sup> ([*release notes*][conemu_relnotes])
+- [Visual Studio Code 1.97][vscode_downloads] ([*release notes*][vscode_relnotes])
 
 > **&#9755;** ***Installation policy***<br/>
 > When possible we install software from a [Zip archive][zip_archive] rather than via a [Windows installer][windows_installer]. In our case we defined **`C:\opt\`** as the installation directory for optional software tools (*in reference to* the [`/opt/`][unix_opt] directory on Unix).
 
-For instance our development environment looks as follows (*November 2024*) <sup id="anchor_01">[1](#footnote_01)</sup>:
+For instance our development environment looks as follows (*February 2025*) <sup id="anchor_02">[2](#footnote_02)</sup>:
 
 <pre style="font-size:80%;">
 C:\opt\ConEmu\                <i>( 26 MB)</i>
 C:\opt\elvis\                 <i>(2.4 MB)</i>
-C:\opt\Git\                   <i>(391 MB)</i>
-C:\opt\VSCode\                <i>(381 MB)</i>
+C:\opt\Git\                   <i>(397 MB)</i>
+C:\opt\VSCode\                <i>(404 MB)</i>
 C:\Program Files\Erlang OTP\  <i>(354 MB)</i>
 </pre>
 
@@ -73,7 +73,7 @@ In the next section we give a brief description of the batch files present in th
 
 ## <span id="commands">Batch/Bash commands</span>
 
-### **`setenv.bat`** <sup id="anchor_02">[2](#footnote_02)</sup>
+### **`setenv.bat`** <sup id="anchor_03">[3](#footnote_03)</sup>
 
 We execute command [**`setenv.bat`**](setenv.bat) once to setup our development environment; it makes external tools such as [**`git.exe`**][git_cli] and [**`sh.exe`**][sh_cli] directly available from the command prompt.
 
@@ -81,8 +81,8 @@ We execute command [**`setenv.bat`**](setenv.bat) once to setup our development 
    <b>&gt; <a href="./setenv.bat">setenv</a></b>
    Tool versions:
       erl 15.1.2, dialyzer v5.2.1, make 4.4.1
-      elvis 3.0.1, code 1.95.2,
-      git 2.47.0, diff 3.10, bash 5.2.37(1)
+      elvis 3.0.1, code 1.97.2,
+      git 2.48.1, diff 3.10, bash 5.2.37(1)
    &nbsp;
    <b>&gt; <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where" rel="external">where</a> git sh</b>
    C:\opt\Git\bin\git.exe
@@ -96,7 +96,25 @@ We execute command [**`setenv.bat`**](setenv.bat) once to setup our development 
 
 ## <span id="footnotes">Footnotes</span> [**&#x25B4;**](#top)
 
-<span id="footnote_01">[1]</span> ***Downloads*** [↩](#anchor_01)
+<span id="footnote_01">[1]</span> ***Terminal Programs*** [↩](#anchor_01)
+
+<dl><dd>
+Besides the long standing used <a href="https://github.com/Maximus5/ConEmu" rel="external">ConEmu</a> we are now also evaluating <a href="https://github.com/microsoft/terminal">Microsoft Windows Terminal</a> ; here is a quick comparison between the two <i>freely available</i> programs :
+<table style="font-size:90%;">
+<tr><th></th><th><a href="https://github.com/Maximus5/ConEmu/releases">ConEmu</a></th><th><a href="https://github.com/microsoft/terminal/releases/tag/v1.22.10352.0">Windows Terminal</a></th></tr>
+<tr><td>Last&nbsp;update</td><td>July 2023</td><td>February 2025</td></tr>
+<tr><td>Download&nbsp;size</td><td style="text-align:right;">5 MB</td><td>11 MB</td></tr>
+<tr><td>Installation&nbsp;size</td><td style="text-align:right;">25 MB</td><td>33 MB</td></tr>
+<tr><td>Memory&nbsp;usage&nbsp;<sup style="font-size:70%;"><b>a)</b></sup></td><td style="text-align:right;">9 MB</td><td>21 MB</td></tr>
+</table>
+<div style="font-size:70%; margin:-10px 0 10px 0;">
+<sup><b>a)</b></sup> Memory usage with 1 command prompt.
+</div>
+
+<p><img src="./docs/images/20250217_Task_Manager_Memory.png" width="90%"/></p>
+</dd></dl>
+
+<span id="footnote_02">[2]</span> ***Downloads*** [↩](#anchor_02)
 
 <dl><dd>
 In our case we downloaded the following installation files (<a href="#proj_deps">see section 1</a>):
@@ -104,12 +122,12 @@ In our case we downloaded the following installation files (<a href="#proj_deps"
 <pre style="font-size:80%;">
 <a href="https://github.com/inaka/elvis/releases/tag/3.0.1" rel="external">elvis</a> (<i>escript</i>)                   <i>(2.4 MB)</i>
 <a href="https://github.com/erlang/otp/releases/tag/OTP-27.1.2" rel="external">otp_win64_27.1.2.exe</a>              <i>(133 MB)</i>
-<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.47.0-64-bit.7z.exe</a>  <i>( 41 MB)</i>
-<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.95.2.zip</a>       <i>(131 MB)</i>
+<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.48.1-64-bit.7z.exe</a>  <i>( 41 MB)</i>
+<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.97.2.zip</a>       <i>(131 MB)</i>
 </pre>
 </dd></dl>
 
-<span id="footnote_02">[2]</span> **`setenv.bat` *usage*** [↩](#anchor_02)
+<span id="footnote_03">[3]</span> **`setenv.bat` *usage*** [↩](#anchor_03)
 
 <dl><dd>
 Batch file <a href=./setenv.bat><code><b>setenv.bat</b></code></a> has specific environment variables set that enable us to use command-line developer tools more easily.
@@ -132,7 +150,7 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/November 2024* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/February 2025* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- link refs -->
@@ -156,7 +174,7 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 [flix_examples]: https://github.com/michelou/flix-examples#top
 [git_cli]: https://git-scm.com/docs/git
 [git_releases]: https://git-scm.com/download/win
-[git_relnotes]: https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/2.47.0.txt
+[git_relnotes]: https://github.com/git/git/blob/v2.48.1/Documentation/RelNotes/2.48.1.txt
 [github_markdown]: https://github.github.com/gfm/
 [golang_examples]: https://github.com/michelou/golang-examples#top
 [graalvm_examples]: https://github.com/michelou/graalvm-examples#top
@@ -179,6 +197,7 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 [rust_examples]: https://github.com/michelou/rust-examples#top
 [scala3_examples]: https://github.com/michelou/dotty-examples#top
 [sh_cli]: https://man7.org/linux/man-pages/man1/sh.1p.html
+[sml_examples]: https://github.com/michelou/sml-examples#top
 [spark_examples]: https://github.com/michelou/spark-examples#top
 [spring_examples]: https://github.com/michelou/spring-examples#top
 [trufflesqueak_examples]: https://github.com/michelou/trufflesqueak-examples#top
