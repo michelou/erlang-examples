@@ -49,7 +49,7 @@
 - [learn you some Erlang](https://learnyousomeerlang.com/contents) by Fred Hebert.
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/February 2025* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/October 2025* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- href links -->

@@ -251,7 +251,7 @@ if defined __ELVI_CMD (
     set "_ELVIS_HOME=%ELVIS_HOME%"
     if %_DEBUG%==1 echo %_DEBUG_LABEL% Using environment variable ELVIS_HOME 1>&2
 ) else (
-    set "__PATH=%ProgramFiles%"
+    set "__PATH=C:\opt"
     for /f "delims=" %%f in ('dir /ad /b "!__PATH!\Elvis*" 2^>NUL') do set "_ELVIS_HOME=!__PATH!\%%f"
     if defined _ELVIS_HOME (
         if %_DEBUG%==1 echo %_DEBUG_LABEL% Using default Elvis installation directory "!_ELVIS_HOME!" 1>&2

@@ -12,25 +12,25 @@
   </tr>
 </table>
 
-[Ada][ada_examples], [Akka][akka_examples], [C++][cpp_examples], [COBOL][cobol_examples], [Dafny][dafny_examples], [Dart][dart_examples], [Deno][deno_examples], [Docker][docker_examples], [Flix][flix_examples], [Golang][golang_examples], [GraalVM][graalvm_examples], [Haskell][haskell_examples], [Kafka][kafka_examples], [Kotlin][kotlin_examples], [LLVM][llvm_examples], [Modula-2][m2_examples], [Node.js][nodejs_examples], [Rust][rust_examples], [Scala 3][scala3_examples], [Spark][spark_examples], [Spring][spring_examples], [Standard ML][sml_examples], [TruffleSqueak][trufflesqueak_examples], [WiX Toolset][wix_examples] and [Zig][zig_examples] are other topics we are continuously monitoring.
+[Ada][ada_examples], [Akka][akka_examples], [C++][cpp_examples], [COBOL][cobol_examples], [Component Pascal][component_pascal_examples], [Dafny][dafny_examples], [Dart][dart_examples], [Deno][deno_examples], [Docker][docker_examples], [Flix][flix_examples], [Golang][golang_examples], [GraalVM][graalvm_examples], [Haskell][haskell_examples], [Kafka][kafka_examples], [Kotlin][kotlin_examples], [LLVM][llvm_examples], [Modula-2][m2_examples], [Node.js][nodejs_examples], [Rust][rust_examples], [Scala 3][scala3_examples], [Spark][spark_examples], [Spring][spring_examples], [Standard ML][sml_examples], [TruffleSqueak][trufflesqueak_examples], [WiX Toolset][wix_examples] and [Zig][zig_examples] are other topics we are continuously monitoring.
 
 ## <span id="proj_deps">Project dependencies</span>
 
 This project depends on the following external software for the **Microsoft Windows** platform:
 
-- [Elvis 3][elvis_releases] ([*release notes*][elvis_relnotes])
+- [Elvis 4][elvis_releases] ([*release notes*][elvis_relnotes])
 - [Erlang 27][erlang_releases] ([*changelog*][erlang_changelog])
-- [Git 2.48][git_releases] ([*release notes*][git_relnotes])
+- [Git 2.51][git_releases] ([*release notes*][git_relnotes])
 
 Optionally one may also install the following software:
 
 - [ConEmu 2023][conemu_downloads] <sup id="anchor_01">[1](#footnote_01)</sup> ([*release notes*][conemu_relnotes])
-- [Visual Studio Code 1.97][vscode_downloads] ([*release notes*][vscode_relnotes])
+- [Visual Studio Code 1.105][vscode_downloads] ([*release notes*][vscode_relnotes])
 
 > **&#9755;** ***Installation policy***<br/>
 > When possible we install software from a [Zip archive][zip_archive] rather than via a [Windows installer][windows_installer]. In our case we defined **`C:\opt\`** as the installation directory for optional software tools (*in reference to* the [`/opt/`][unix_opt] directory on Unix).
 
-For instance our development environment looks as follows (*February 2025*) <sup id="anchor_02">[2](#footnote_02)</sup>:
+For instance our development environment looks as follows (*October 2025*) <sup id="anchor_02">[2](#footnote_02)</sup>:
 
 <pre style="font-size:80%;">
 C:\opt\ConEmu\                <i>( 26 MB)</i>
@@ -80,9 +80,9 @@ We execute command [**`setenv.bat`**](setenv.bat) once to setup our development 
    <pre style="font-size:80%;">
    <b>&gt; <a href="./setenv.bat">setenv</a></b>
    Tool versions:
-      erl 15.1.2, dialyzer v5.2.1, make 4.4.1
-      elvis 3.0.1, code 1.97.2,
-      git 2.48.1, diff 3.10, bash 5.2.37(1)
+      erl 15.2.7.3, dialyzer v5.3.1, make 4.4.1
+      elvis 4.0.0, code 1.105.1,
+      git 2.51.1, diff 3.12, bash 5.2.37(1)
    &nbsp;
    <b>&gt; <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where" rel="external">where</a> git sh</b>
    C:\opt\Git\bin\git.exe
@@ -120,10 +120,10 @@ Besides the long standing used <a href="https://github.com/Maximus5/ConEmu" rel=
 In our case we downloaded the following installation files (<a href="#proj_deps">see section 1</a>):
 </p>
 <pre style="font-size:80%;">
-<a href="https://github.com/inaka/elvis/releases/tag/3.0.1" rel="external">elvis</a> (<i>escript</i>)                   <i>(2.4 MB)</i>
-<a href="https://github.com/erlang/otp/releases/tag/OTP-27.1.2" rel="external">otp_win64_27.1.2.exe</a>              <i>(133 MB)</i>
-<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.48.1-64-bit.7z.exe</a>  <i>( 41 MB)</i>
-<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.97.2.zip</a>       <i>(131 MB)</i>
+<a href="https://github.com/inaka/elvis/releases/tag/4.0.0" rel="external">elvis</a> (<i>escript</i>)                   <i>(2.4 MB)</i>
+<a href="https://github.com/erlang/otp/releases/tag/OTP-27.3.4.4" rel="external">otp_win64_27.3.4.4.exe</a>            <i>(133 MB)</i>
+<a href="https://git-scm.com/download/win" rel="external">PortableGit-2.51.1-64-bit.7z.exe</a>  <i>( 41 MB)</i>
+<a href="https://code.visualstudio.com/Download#" rel="external">VSCode-win32-x64-1.105.1.zip</a>      <i>(131 MB)</i>
 </pre>
 </dd></dl>
 
@@ -150,7 +150,7 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 
 ***
 
-*[mics](https://lampwww.epfl.ch/~michelou/)/February 2025* [**&#9650;**](#top)
+*[mics](https://lampwww.epfl.ch/~michelou/)/October 2025* [**&#9650;**](#top)
 <span id="bottom">&nbsp;</span>
 
 <!-- link refs -->
@@ -158,6 +158,7 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 [ada_examples]: https://github.com/michelou/ada-examples#top
 [akka_examples]: https://github.com/michelou/akka-examples#top
 [cobol_examples]: https://github.com/michelou/cobol-examples#top
+[component_pascal_examples]: https://github.com/michelou/component-pascal-examples#top
 [conemu_downloads]: https://github.com/Maximus5/ConEmu/releases
 [conemu_relnotes]: https://conemu.github.io/blog/2023/07/24/Build-230724.html
 [cpp_examples]: https://github.com/michelou/cpp-examples#top
@@ -167,14 +168,14 @@ Concretely, in our GitHub projects which depend on Visual Studio (e.g. <a href="
 [dialyzer]: https://www.erlang.org/doc/apps/dialyzer/dialyzer_chapter
 [docker_examples]: https://github.com/michelou/docker-examples#top
 [elvis_releases]: https://github.com/inaka/elvis/releases
-[elvis_relnotes]: https://github.com/inaka/elvis/releases/tag/3.0.1
+[elvis_relnotes]: https://github.com/inaka/elvis/releases/tag/4.0.0
 [erlang]: https://erlang.org/
-[erlang_changelog]: https://github.com/erlang/otp/releases/tag/OTP-27.1.2
+[erlang_changelog]: https://github.com/erlang/otp/releases/tag/OTP-27.3.4.4
 [erlang_releases]: https://github.com/erlang/otp/releases
 [flix_examples]: https://github.com/michelou/flix-examples#top
 [git_cli]: https://git-scm.com/docs/git
 [git_releases]: https://git-scm.com/download/win
-[git_relnotes]: https://github.com/git/git/blob/v2.48.1/Documentation/RelNotes/2.48.1.txt
+[git_relnotes]: https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/2.51.0.adoc
 [github_markdown]: https://github.github.com/gfm/
 [golang_examples]: https://github.com/michelou/golang-examples#top
 [graalvm_examples]: https://github.com/michelou/graalvm-examples#top

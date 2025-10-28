@@ -53,6 +53,7 @@ set _ERROR_LABEL=%_STRONG_FG_RED%Error%_RESET%:
 set _WARNING_LABEL=%_STRONG_FG_YELLOW%Warning%_RESET%:
 
 set "_SOURCE_DIR=%_ROOT_DIR%\src"
+set "_SOURCE_MAIN_DIR=%_SOURCE_DIR%\main\erlang
 set "_TARGET_DIR=%_ROOT_DIR%target"
 
 set _EXPORT_NAME=start
@@ -237,15 +238,17 @@ if not %ERRORLEVEL%==0 (
 goto :eof
 
 :lint
-set __ELVIS_OPTS=--output-format plain 
-if %_DEBUG%==0 set __ELVIS_OPTS=--quiet %__ELVIS_OPTS%
-
-if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_ELVIS_CMD%" rock %__ELVIS_OPTS%
-) else if %_VERBOSE%==1 echo Analyze Erlang source files in directory "!_SOURCE_DIR:%_ROOT_DIR%\=!" 1>&2
+set __ELVIS_OPTS=--config "%_ROOT_DIR%elvis.config" --output-format plain
+if %_DEBUG%==1 ( set __ELVIS_OPTS=--verbose %__ELVIS_OPTS%
+) else if %_VERBOSE%==1 ( set __ELVIS_OPTS=--verbose %__ELVIS_OPTS%
+) else ( set __ELVIS_OPTS=--quiet %__ELVIS_OPTS%
+)
+if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_ELVIS_CMD%" rock %__ELVIS_OPTS% 1>&2
+) else if %_VERBOSE%==1 echo Analyze Erlang source files in directory "!_SOURCE_MAIN_DIR:%_ROOT_DIR%\=!" 1>&2
 )
 call "%_ELVIS_CMD%" rock %__ELVIS_OPTS% %_STDOUT_REDIRECT%
 if not %ERRORLEVEL%==0 (
-    echo %_ERROR_LABEL% Failed to analyze Erlang source files in directory "!_SOURCE_DIR:%_ROOT_DIR%\=!" 1>&2
+    echo %_ERROR_LABEL% Failed to analyze Erlang source files in directory "!_SOURCE_MAIN_DIR:%_ROOT_DIR%\=!" 1>&2
     set _EXITCODE=1
     goto :eof
 )
@@ -256,7 +259,7 @@ if not exist "%_TARGET_DIR%" mkdir "%_TARGET_DIR%"
 
 set __SOURCE_FILES=
 set __N=0
-for /f "delims=" %%f in ('dir /s /b "%_SOURCE_DIR%\main\erlang\*.erl" 2^>NUL') do (
+for /f "delims=" %%f in ('dir /s /b "%_SOURCE_MAIN_DIR%\*.erl" 2^>NUL') do (
     set __SOURCE_FILES=!__SOURCE_FILES! "%%f"
     set /a __N+=1
 )
@@ -270,7 +273,7 @@ if %__N%==0 (
 set __ERLC_OPTS=-o "%_TARGET_DIR%"
 if %_DEBUG%==1 set __ERL_OPTS=-v %_ERLC_OPTS%
 
-if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_ERLC_CMD%" %__ERLC_OPTS% %__SOURCE_FILES%
+if %_DEBUG%==1 ( echo %_DEBUG_LABEL% "%_ERLC_CMD%" %__ERLC_OPTS% %__SOURCE_FILES% 1>&2
 ) else if %_VERBOSE%==1 echo Compile %__N_FILES% into directory "!_TARGET_DIR:%_ROOT_DIR%=!" 1>&2
 )
 call "%_ERLC_CMD%" %__ERLC_OPTS% %__SOURCE_FILES% %_STDOUT_REDIRECT%
